@@ -1,9 +1,6 @@
-# RESTful API Node Typescript Server Boilerplate
+# Product Catalog Service
 
-[![Node.js CI](https://github.com/saisilinus/node-express-mongoose-typescript-boilerplate/actions/workflows/node.js.yml/badge.svg)](https://github.com/saisilinus/node-express-mongoose-typescript-boilerplate/actions/workflows/node.js.yml)
-[![codecov](https://codecov.io/gh/saisilinus/node-express-mongoose-typescript-boilerplate/branch/master/graph/badge.svg?token=UYJAL9KTMD)](https://codecov.io/gh/saisilinus/node-express-mongoose-typescript-boilerplate)
-
-By running a single command, you will get a production-ready Node.js TypeScript app installed and fully configured on your machine. The app comes with many built-in features, such as authentication using JWT, request validation, unit and integration tests, continuous integration, docker support, API documentation, pagination, etc. For more details, check the features list below.
+This microservice manages the product catalog and provides information about the available products.
 
 ## Not Compatible with Node.js v19
 
