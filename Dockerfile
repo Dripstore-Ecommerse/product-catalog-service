@@ -1,26 +1,11 @@
-# development stage
-FROM node:14-alpine as base
+FROM node:16-alpine
 
-WORKDIR /usr/src/app
+WORKDIR /app
 
-COPY package.json yarn.lock tsconfig.json ecosystem.config.json ./
+COPY package.json package-lock.json /app/
 
-COPY ./src ./src
+RUN npm install
 
-RUN ls -a
+COPY . .
 
-RUN yarn install --pure-lockfile && yarn compile
-
-# production stage
-
-FROM base as production
-
-WORKDIR /usr/prod/app
-
-ENV NODE_ENV=production
-
-COPY package.json yarn.lock ecosystem.config.json ./
-
-RUN yarn install --production --pure-lockfile
-
-COPY --from=base /usr/src/app/dist ./dist
+CMD ["npm", "start"]

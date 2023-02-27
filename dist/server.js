@@ -32,4 +32,4 @@ process.on("SIGTERM", () => {
         server.close();
     }
 });
-//# sourceMappingURL=index.js.map
+//# sourceMappingURL=server.js.map

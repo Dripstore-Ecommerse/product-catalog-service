@@ -4,7 +4,6 @@ import xss from "xss-clean";
 import ExpressMongoSanitize from "express-mongo-sanitize";
 import compression from "compression";
 import cors from "cors";
-import passport from "passport";
 import httpStatus from "http-status";
 import config from "./config/config";
 import { morgan } from "./modules/logger";
@@ -29,8 +28,6 @@ app.use(xss());
 app.use(ExpressMongoSanitize());
 // gzip compression
 app.use(compression());
-// jwt authentication
-app.use(passport.initialize());
 // v1 api routes
 app.use("/", routes);
 // send back a 404 error for any unknown api request
