@@ -6,13 +6,17 @@ import compression from "compression";
 import cors from "cors";
 import httpStatus from "http-status";
 import config from "./config/config";
-import { morgan } from "./modules/logger";
-import { ApiError, errorConverter, errorHandler } from "./modules/errors";
+import {
+  morgan,
+  ApiError,
+  errorConverter,
+  errorHandler,
+} from "@dripstore/common/build";
 import routes from "./routes/v1";
 
 const app: Express = express();
 
-if (config.env !== "test") {
+if (config.ENVIRONMENT !== "test") {
   app.use(morgan.successHandler);
   app.use(morgan.errorHandler);
 }

@@ -1,0 +1,25 @@
+# base product
+Product:
+  - id: unique identifier for the product (string)
+  - name: name of the product (string)
+  - description: description of the product (string)
+  - price: price of the product (float)
+  - category: category of the product (string)
+  - slug: tags to identify a product (string)
+  - attributes: key-value pairs of additional attributes for the product (map)
+  - image: url of the image (string)
+
+# variant of the base product
+ProductVariant:
+  - id: unique identifier for the product variant (string)
+  - productId: identifier of the parent product (string)
+  - name: name of the product variant (string)
+  - description: description of the product variant (string)
+  - price: price of the product variant (float)
+  - attributes: key-value pairs of additional attributes for the product variant (map)
+  - image: url of the image (string)
+
+Inventory:
+  - productId: identifier of the product (string)
+  - variantId: identifier of the product variant (string)
+  - quantity: quantity of the product variant in stock (integer)

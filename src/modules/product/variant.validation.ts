@@ -9,8 +9,9 @@ import { objectId } from "../validate/custom.validation";
     attributes: { type: Object, required: true },
     image: { type: [String], required: true },  
 */
-const createProductBody = {
+const createVariantBody = {
   name: Joi.string().required(),
+  productId: Joi.string().custom(objectId),
   description: Joi.string().required(),
   price: Joi.number().required(),
   category: Joi.array().required(),
@@ -20,13 +21,13 @@ const createProductBody = {
 };
 
 export const createProduct = {
-  body: Joi.object().keys(createProductBody),
+  body: Joi.object().keys(createVariantBody),
 };
 
 export const getProducts = {
   query: Joi.object().keys({
-    name: Joi.string(),
-    price: Joi.string(),
+    name: Joi.string(), // not clear
+    price: Joi.string(), // not clear
     sortBy: Joi.string(),
     projectBy: Joi.string(),
     limit: Joi.number().integer(),

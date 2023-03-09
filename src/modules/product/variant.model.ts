@@ -1,10 +1,14 @@
 import mongoose, { Schema } from "mongoose";
 import toJSON from "../toJSON/toJSON";
 import paginate from "../paginate/paginate";
-import { IProduct, ProductModel } from "./global.interfaces";
+import { IProductVariant, ProductModel } from "./global.interfaces";
 
-const productSchema: Schema = new mongoose.Schema(
+const productVariantSchema: Schema = new mongoose.Schema(
   {
+    productId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Product",
+    },
     name: {
       type: String,
       required: true,
@@ -50,21 +54,15 @@ const productSchema: Schema = new mongoose.Schema(
         },
       },
     ],
-    variations: [
-      {
-        type: mongoose.Types.ObjectId,
-        ref: "ProductVariation",
-      },
-    ],
   },
   { timestamps: true }
 );
-productSchema.plugin(toJSON);
-productSchema.plugin(paginate);
+productVariantSchema.plugin(toJSON);
+productVariantSchema.plugin(paginate);
 
-const Product = mongoose.model<IProduct, ProductModel>(
-  "Product",
-  productSchema
+const ProductVariant = mongoose.model<IProductVariant, ProductModel>(
+  "ProductVariant",
+  productVariantSchema
 );
 
-export default Product;
+export default ProductVariant;

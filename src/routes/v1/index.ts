@@ -10,7 +10,7 @@ interface IRoute {
 
 const defaultIRoute: IRoute[] = [
   {
-    path: "/products",
+    path: "/",
     route: productRoute,
   },
 ];

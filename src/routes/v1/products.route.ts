@@ -1,6 +1,7 @@
 import express, { Router } from "express";
 import { validate } from "../../modules/validate";
 import { productController, productValidation } from "../../modules/product";
+import { protect, allow } from "@dripstore/common/build";
 
 const router: Router = express.Router();
 
@@ -17,10 +18,14 @@ router
   .get(validate(productValidation.getProduct), productController.getProduct)
   .patch(
     validate(productValidation.updateProduct),
+    protect,
+    allow(["user"]),
     productController.updateProduct
   )
   .delete(
     validate(productValidation.deleteProduct),
+    protect,
+    allow(["admin"]),
     productController.deleteProduct
   );
 

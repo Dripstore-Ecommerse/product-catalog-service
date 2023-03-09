@@ -1,6 +1,6 @@
 import httpStatus from "http-status";
 import mongoose from "mongoose";
-import Product from "./product.model";
+import ProductVariant from "./variant.model";
 import { ApiError } from "@dripstore/common/build";
 import { IOptions, QueryResult } from "../paginate/paginate";
 import {
@@ -15,10 +15,10 @@ import {
  * @param {NewCreatedProduct} productBody
  * @returns {Promise<IProduct>}
  */
-export const createProduct = async (
+export const createProductVariant = async (
   productBody: NewCreatedProduct
 ): Promise<IProduct> => {
-  return Product.create(productBody);
+  return ProductVariant.create(productBody);
 };
 
 /**
@@ -26,10 +26,10 @@ export const createProduct = async (
  * @param {NewRegisteredProduct} productBody
  * @returns {Promise<IProduct>}
  */
-export const registerProduct = async (
+export const registerProductVariant = async (
   productBody: NewRegisteredProduct
 ): Promise<IProduct> => {
-  return Product.create(productBody);
+  return ProductVariant.create(productBody);
 };
 
 /**
@@ -38,11 +38,11 @@ export const registerProduct = async (
  * @param {Object} options - Query options
  * @returns {Promise<QueryResult>}
  */
-export const queryProducts = async (
+export const queryVariantProducts = async (
   filter: Record<string, any>,
   options: IOptions
 ): Promise<QueryResult> => {
-  const products = await Product.paginate(filter, options);
+  const products = await ProductVariant.paginate(filter, options);
   return products;
 };
 
@@ -51,18 +51,9 @@ export const queryProducts = async (
  * @param {mongoose.Types.ObjectId} id
  * @returns {Promise<IProduct | null>}
  */
-export const getProductById = async (
+export const getVariantProductById = async (
   id: mongoose.Types.ObjectId
-): Promise<IProduct | null> => Product.findById(id);
-
-/**
- * Get product by email
- * @param {string} email
- * @returns {Promise<IProduct | null>}
- */
-export const getProductByEmail = async (
-  email: string
-): Promise<IProduct | null> => Product.findOne({ email });
+): Promise<IProduct | null> => ProductVariant.findById(id);
 
 /**
  * Update product by id
@@ -70,11 +61,11 @@ export const getProductByEmail = async (
  * @param {UpdateProductBody} updateBody
  * @returns {Promise<IProduct | null>}
  */
-export const updateProductById = async (
+export const updateVariantProductById = async (
   productId: mongoose.Types.ObjectId,
   updateBody: UpdateProductBody
 ): Promise<IProduct | null> => {
-  const product = await getProductById(productId);
+  const product = await getVariantProductById(productId);
   if (!product) {
     throw new ApiError(httpStatus.NOT_FOUND, "Product not found");
   }
@@ -89,10 +80,10 @@ export const updateProductById = async (
  * @param {mongoose.Types.ObjectId} productId
  * @returns {Promise<IProduct | null>}
  */
-export const deleteProductById = async (
+export const deleteVariantProductById = async (
   productId: mongoose.Types.ObjectId
 ): Promise<IProduct | null> => {
-  const product = await getProductById(productId);
+  const product = await getVariantProductById(productId);
   if (!product) {
     throw new ApiError(httpStatus.NOT_FOUND, "Product not found");
   }

@@ -2,18 +2,25 @@ import httpStatus from "http-status";
 import { Request, Response } from "express";
 import mongoose from "mongoose";
 import catchAsync from "../utils/catchAsync";
-import ApiError from "../errors/ApiError";
+import { ApiError } from "@dripstore/common/build";
 import pick from "../utils/pick";
 import { IOptions } from "../paginate/paginate";
 import * as productService from "./product.service";
+import RabbitMQProducer from "../utils/RabbitMQProducer";
+
+const producer = new RabbitMQProducer(
+  "amqp://default_user_uJAu0ttkJDvBBolxyPe:eDbrE5bOGGXMFsQh3LpmtLIDqcQzvB52@10.105.181.43",
+  "product"
+);
 
 export const createProduct = catchAsync(async (req: Request, res: Response) => {
   const product = await productService.createProduct(req.body);
+  producer.send(JSON.stringify(product));
   res.status(httpStatus.CREATED).send(product);
 });
 
 export const getProducts = catchAsync(async (req: Request, res: Response) => {
-  const filter = pick(req.query, ["name", "role"]);
+  const filter = pick(req.query, ["name", "price"]);
   const options: IOptions = pick(req.query, [
     "sortBy",
     "limit",
